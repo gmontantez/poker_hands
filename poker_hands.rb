@@ -54,7 +54,22 @@ def straight_flush(hands)
 end
 
 def face_changer(face_value)
-  face_value 
+  face_value = face_value.map do |face|
+    if face == "A"
+      "14"
+    elsif face == "K"
+      "13"
+    elsif face == "Q"
+      "12"
+    elsif face == "J"
+      "11"
+    elsif face == "T"
+      "10"
+    else
+      face
+    end
+  end
+face_value       
 end
 
 hand_builder()

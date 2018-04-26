@@ -43,6 +43,18 @@ class Poker_hands_test < Minitest::Test
 		assert_equal(Array,face_changer(face_value).class)
 	end
 
+	def test_face_A_to_14
+		hand1 = ["A", "3", "2", "5", "7"]
+		changed_hand = ["14", "3", "2", "5", "7"]
+		assert_equal(changed_hand,face_changer(hand1))
+	end
+
+	def test_face_all_letters
+		hand1 = ["A", "K", "Q", "J", "T"]
+		changed_hand = ["14", "13", "12", "11", "10"]
+		assert_equal(changed_hand,face_changer(hand1))
+	end
+
 	# def test_valid_straight_flush
 	# 	hand1 = {"hand1" => ["8d", "6d", "7d", "5d", "9d"]}
 	# 	winner = {"hand1" => "Winner winner chicken dinner"} 
