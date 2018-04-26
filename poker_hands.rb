@@ -55,7 +55,7 @@ def straight_flush(hands)
        end
     end
   
-  p hands
+   hands
 end
 
 def face_changer(face_value)

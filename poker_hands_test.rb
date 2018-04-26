@@ -55,11 +55,11 @@ class Poker_hands_test < Minitest::Test
 		assert_equal(changed_hand,face_changer(hand1))
 	end
 
-	# def test_valid_straight_flush
-	# 	hand1 = {"hand1" => ["8d", "6d", "7d", "5d", "9d"]}
-	# 	winner = {"hand1" => "Winner winner chicken dinner"} 
-	# 	assert_equal(winner,straight_flush(hand1))
-	# end
+	def test_valid_straight_flush
+		hand1 = {"hand1" => ["6d", "7d", "8d", "9d", "Td"]}
+		winner = {"hand1" => "Straight flush 10"} 
+		assert_equal(winner,straight_flush(hand1))
+	end
 
 
 end
