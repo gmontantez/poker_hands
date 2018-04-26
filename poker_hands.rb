@@ -45,16 +45,17 @@ def straight_flush(hands)
       suit_value << card[1]
     end
     face_value = face_changer(face_value)
-    face_value
+    face_value.sort!
+    newarray = [*face_value[0]..face_value[0]+4]
     if suit_value.uniq.length == 1
-      
-       p face_value.sort 
+       if face_value == newarray
+          hands['hand1'] = "Straight flush #{face_value.last}" 
     #     face +=1
     #     face
-    #   end
+       end
     end
   
-  hands
+  p hands
 end
 
 def face_changer(face_value)
