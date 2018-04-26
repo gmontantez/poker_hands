@@ -23,31 +23,29 @@ def royal_flush(hands)
   suit_value = [] #give an empty array to suit_value to be able to push each index position 1 into it in conditional below 
   face_value = [] #give an empty array to face_value to be able to push each index position 0 into it in conditional below 
   hand = hands['hand1'] #digging into hash to give variable name to hand of cards
-  hand.each do |card| #iterates over each hand of cards
-    face_value << card[0] #iterates over each card and pushed index position 0 into face_value array 
-    suit_value << card[1] #iterates over each card and pushed index position 1 into suit_value array 
-  end
-  if suit_value.uniq.length == 1 #checks for duplication of index position 1 in each card that was pushed into suit_value; if it matches then it comes back 1 time 
-  if face_value.include?("A") && face_value.include?("K") && face_value.include?("Q") && face_value.include?("J") && face_value.include?("T") #if index position 0 of each card in face_value array and returns all of these conditionals, then it returns "Winner winner chicken dinner" (called below)
-    hands['hand1'] = "Winner winner chicken dinner"
+    hand.each do |card| #iterates over each hand of cards
+      face_value << card[0] #iterates over each card and pushed index position 0 into face_value array 
+      suit_value << card[1] #iterates over each card and pushed index position 1 into suit_value array 
+    end
+    if suit_value.uniq.length == 1 #checks for duplication of index position 1 in each card that was pushed into suit_value; if it matches then it comes back 1 time 
+      if face_value.include?("A") && face_value.include?("K") && face_value.include?("Q") && face_value.include?("J") && face_value.include?("T") #if index position 0 of each card in face_value array and returns all of these conditionals, then it returns "Winner winner chicken dinner" (called below)
+      hands['hand1'] = "Winner winner chicken dinner"
     #if each conditional is met above, then returns "Winner winner chicken dinner"
-  end
+      end
+    end
+  hands
 end
 
-# def straight_flush(hands)
-#     suit_value = []
-#     face_value = []
-#     hand = hands['hand1']
-#     hand.each do |card|
-#       face_value << card[0]
-#       suit_value << card[1]
-#     end
-
-
-
-hands
+def straight_flush(hands)
+  suit_value = []
+  face_value = []
+  hand = hands['hand1']
+    hand.each do |card|
+      face_value << card[0]
+      suit_value << card[1]
+    end
+  hands
 end
-
 
 hand_builder()
 
