@@ -44,10 +44,22 @@ def straight_flush(hands)
       face_value << card[0]
       suit_value << card[1]
     end
+    # if suit_value.uniq.length == 1
+    #   if face_value.sort.each do |card|
+    #     face_value +=1
+    #     face_value
+    #   end
+    # end
   hands
 end
 
+def face_changer(face_value)
+  face_value 
+end
+
 hand_builder()
+
+
 
 # def hand_builder()
 #   hands = {}
