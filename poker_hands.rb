@@ -44,62 +44,41 @@ def straight_flush(hands)
       face_value << card[0]
       suit_value << card[1]
     end
-    # if suit_value.uniq.length == 1
-    #   if face_value.sort.each do |card|
-    #     face_value +=1
-    #     face_value
+    face_value = face_changer(face_value)
+    face_value
+    if suit_value.uniq.length == 1
+      
+       p face_value.sort 
+    #     face +=1
+    #     face
     #   end
-    # end
+    end
+  
   hands
 end
 
 def face_changer(face_value)
+  #maps elements of one array to another, converting each letter element to a number
   face_value = face_value.map do |face|
     if face == "A"
-      "14"
+      14
     elsif face == "K"
-      "13"
+      13
     elsif face == "Q"
-      "12"
+      12
     elsif face == "J"
-      "11"
+      11
     elsif face == "T"
-      "10"
+      10
     else
-      face
+    face.to_i
     end
+
   end
-face_value       
+      
 end
 
-hand_builder()
+p hand_builder()
 
 
-
-# def hand_builder()
-#   hands = {}
-#   faces = [A,K,Q,J,10,9,8,7,6,5,4,3,2]
-#   suits = "cdhs"
-#   deck = []
-#   faces.each do |f|
-#     suits.each_byte do |s|
-#         deck.push(f.to_s + s.chr)
-#         deck = deck.shuffle!
-#     end
-#   end
-#   my_hand = deck.pop(5)
-#   # opponent_hand = deck.pop(5)
-#   hands["my_hand"] = my_hand 
-#   # hands["opponent_hand"] = opponent_hand
-#   #taking hands hash, sets key of my_hand equal to value of my_hand
-#   #if my_hand doesn't exist as a key, it will be created
-#   #if it does exist, it will just update the value that's there
-#   hands
-# end
-
-
-# def card_game(my_hand,opponent_hand)
-
-# end
-# p hand_builder()
 
