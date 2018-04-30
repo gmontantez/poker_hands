@@ -144,7 +144,19 @@ def straight(hands)
         hands['hand1'] = "Straight #{face_value.last}" 
       end
    p hands
-end  
+end
+def two_pair(hands)
+  suit_value = []
+  face_value = []
+  hand = hands['hand1']
+    hand.each do |card|
+      face_value << card[0]
+      suit_value << card[1]
+    end
+    
+    hands
+      
+end   
 
 
 def face_changer(face_value)
