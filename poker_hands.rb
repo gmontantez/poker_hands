@@ -66,7 +66,10 @@ def four_of_a_kind(hands)
       face_value << card[0]
       suit_value << card[1]
     end
-   hands
+    if face_value.uniq.length == 2
+      hands['hand1'] = "Four of a kind winner"
+    end
+   p hands
 end      
 
 
