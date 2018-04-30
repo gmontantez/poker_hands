@@ -127,7 +127,20 @@ def flush(hands)
       hands['hand1'] = "Flush winner"
     end
     p hands   
-end   
+end 
+
+def straight(hands)
+  suit_value = []
+  face_value = []
+  hand = hands['hand1']
+    hand.each do |card|
+      face_value << card[0]
+      suit_value << card[1]
+    end
+
+  
+   hands
+end  
 
 
 def face_changer(face_value)
