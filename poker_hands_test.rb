@@ -72,5 +72,10 @@ class Poker_hands_test < Minitest::Test
 		assert_equal(winner,four_of_a_kind(hand1))
 	end
 
+	def test_for_three_of_a_kind_class
+		hand1 = {"hand1" => ["8h", "8s", "8d", "7c", "Td"]} 
+		assert_equal(Hash,three_of_a_kind(hand1).class)
+	end
+
 
 end

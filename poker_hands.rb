@@ -69,8 +69,19 @@ def four_of_a_kind(hands)
     if face_value.uniq.length == 2
       hands['hand1'] = "Four of a kind winner"
     end
-   p hands
-end      
+   hands
+end 
+
+def three_of_a_kind(hands)
+  suit_value = []
+  face_value = []
+  hand = hands['hand1']
+    hand.each do |card|
+      face_value << card[0]
+      suit_value << card[1]
+    end 
+  p hands    
+end     
 
 
 def face_changer(face_value)
