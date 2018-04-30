@@ -153,7 +153,9 @@ def two_pair(hands)
       face_value << card[0]
       suit_value << card[1]
     end
-    
+    if face_value.uniq.length == 3 
+      hands['hand1'] = "Two Pair winner"
+    end 
     hands
       
 end   
