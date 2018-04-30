@@ -111,9 +111,20 @@ def full_house(hands)
     if face_value.uniq.length == 2 
       hands['hand1'] = "Full House winner"
     end 
-    p hands
+    hands
       
-end    
+end 
+
+def flush(hands)
+  suit_value = []
+  face_value = []
+  hand = hands['hand1']
+    hand.each do |card|
+      face_value << card[0]
+      suit_value << card[1]
+    end
+    p hands   
+   end   
 
 
 def face_changer(face_value)
