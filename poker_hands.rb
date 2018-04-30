@@ -126,7 +126,7 @@ def flush(hands)
     if suit_value.uniq.length == 1
       hands['hand1'] = "Flush winner"
     end
-    p hands   
+    hands   
 end 
 
 def straight(hands)
@@ -137,9 +137,13 @@ def straight(hands)
       face_value << card[0]
       suit_value << card[1]
     end
-
-  
-   hands
+    face_value = face_changer(face_value)
+    face_value.sort!
+    newarray = [*face_value[0]..face_value[0]+4]
+      if face_value == newarray
+        hands['hand1'] = "Straight #{face_value.last}" 
+      end
+   p hands
 end  
 
 

@@ -104,7 +104,9 @@ class Poker_hands_test < Minitest::Test
 		hand1 = {"hand1" => ["6d", "7h", "8d", "9s", "Tc"]}
 		assert_equal(Hash,straight(hand1).class)
 	end
-
-
-
+	def test_valid_straight
+		hand1 = {"hand1" => ["6d", "7h", "8d", "9s", "Tc"]}
+		winner = {"hand1" => "Straight 10"} 
+		assert_equal(winner,straight(hand1))
+	end
 end
