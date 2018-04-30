@@ -81,7 +81,7 @@ def three_of_a_kind(hands)
       suit_value << card[1]
     end
     if face_value.uniq.length == 3
-      hands['hand1'] = "Four of a kind winner"
+      hands['hand1'] = "Three of a kind winner"
     end 
   hands    
 end 
@@ -94,8 +94,10 @@ def pair(hands)
       face_value << card[0]
       suit_value << card[1]
     end
+    if face_value.uniq.length == 4
+      hands['hand1'] = "Pair winner"
+    end 
   p hands
-      
 end    
 
 
