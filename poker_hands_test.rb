@@ -95,6 +95,11 @@ class Poker_hands_test < Minitest::Test
 		hand1 = {"hand1" => ["8d", "Kd", "Qd", "Jd", "Td"]} 
 		assert_equal(Hash,flush(hand1).class)
 	end
+	def test_flush
+		hand1 = {"hand1" => ["8d", "Kd", "Qd", "Jd", "Td"]}
+		winner = {"hand1" => "Flush winner"} 
+		assert_equal(winner,flush(hand1))
+	end
 
 
 end

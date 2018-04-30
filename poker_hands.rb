@@ -123,8 +123,11 @@ def flush(hands)
       face_value << card[0]
       suit_value << card[1]
     end
+    if suit_value.uniq.length == 1
+      hands['hand1'] = "Flush winner"
+    end
     p hands   
-   end   
+end   
 
 
 def face_changer(face_value)
