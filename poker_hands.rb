@@ -58,6 +58,18 @@ def straight_flush(hands)
    hands
 end
 
+def four_of_a_kind(hands)
+  suit_value = []
+  face_value = []
+  hand = hands['hand1']
+    hand.each do |card|
+      face_value << card[0]
+      suit_value << card[1]
+    end
+   hands
+end      
+
+
 def face_changer(face_value)
   #maps elements of one array to another, converting each letter element to a number
   face_value = face_value.map do |face|
@@ -76,7 +88,7 @@ def face_changer(face_value)
     end
 
   end
-      
+
 end
 
 p hand_builder()

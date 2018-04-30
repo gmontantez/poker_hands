@@ -24,7 +24,7 @@ class Poker_hands_test < Minitest::Test
 		assert_equal(hand1,hand1.uniq)
 	# 	assert_equal(opponent_hand,opponent_hand.uniq)
 	end
-	def test_for_royal_flush_hash
+	def test_for_royal_flush_hash_class
 		hand1 = {"hand1" => ["Ad", "Kd", "Qd", "Jd", "Td"]} 
 		assert_equal(Hash,royal_flush(hand1).class)
 	end
@@ -33,7 +33,7 @@ class Poker_hands_test < Minitest::Test
 		winner = {"hand1" => "Winner winner chicken dinner"} 
 		assert_equal(winner,royal_flush(hand1))
 	end
-	def test_for_straight_flush_hash
+	def test_for_straight_flush_hash_class
 		hand1 = {"hand1" => ["8d", "6d", "7d", "5d", "9d"]} 
 		assert_equal(Hash,straight_flush(hand1).class)
 	end
@@ -60,6 +60,17 @@ class Poker_hands_test < Minitest::Test
 		winner = {"hand1" => "Straight flush 10"} 
 		assert_equal(winner,straight_flush(hand1))
 	end
+
+	def test_for_four_of_a_kind_class
+		hand1 = {"hand1" => ["8h", "8s", "8d", "8c", "Td"]} 
+		assert_equal(Hash,four_of_a_kind(hand1).class)
+	end
+
+	# def test_four_of_a_kind
+	# 	hand1 = {"hand1" => ["8h", "8s", "8d", "8c", "Td"]}
+	# 	winner = {"hand1" => "Four of a kind"} 
+	# 	assert_equal(winner,four_of_a_kind(hand1))
+	# end
 
 
 end
