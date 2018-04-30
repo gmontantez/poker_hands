@@ -99,5 +99,11 @@ class Poker_hands_test < Minitest::Test
 		assert_equal(Hash,full_house(hand1).class)
 	end
 
+	def test_for_full_house
+		hand1 = {"hand1" => ["8h", "8s", "4d", "4c", "4h"]} 
+		winner = {"hand1" => "Full House winner"} 
+		assert_equal(winner,full_house(hand1))
+	end
+
 
 end

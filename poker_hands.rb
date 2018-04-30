@@ -108,6 +108,9 @@ def full_house(hands)
       face_value << card[0]
       suit_value << card[1]
     end
+    if face_value.uniq.length == 2 
+      hands['hand1'] = "Full House winner"
+    end 
     p hands
       
 end    
