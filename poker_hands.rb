@@ -68,7 +68,7 @@ def hand_comparison(hands)
   elsif hands["hand1"] < hands["hand2"]
     p "hand2 is the winner"
   else
-    p "tie"
+    p "it's a tie"
   end
 end
 

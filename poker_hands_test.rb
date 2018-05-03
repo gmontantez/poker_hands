@@ -248,4 +248,11 @@ class Poker_hands_test < Minitest::Test
 		hands = {"hand1" => hand1, "hand2" => hand2}
 		assert_equal("hand1 is the winner",hand_comparison(hands))
 	end
+
+	def test_hand_comparison_high_card_tie
+		hand1 = ["2h", "4s", "3c", "7d", "Ah"]
+		hand2 = ["Ah", "7c", "3h", "4c", "5h"]
+		hands = {"hand1" => hand1, "hand2" => hand2}
+		assert_equal("it's a tie",hand_comparison(hands))
+	end
 end
