@@ -282,6 +282,12 @@ class Poker_hands_test < Minitest::Test
 	 	assert_equal("hand1 is the winner",deal_with_tie(hand1,hand2))
 	end
 
+	def test_deal_with_tie_three_of_a_kind
+		hand1 = ["4s", "4d", "4h", "6h", "5h"]
+		hand2 = ["3h", "7s", "5h", "7d", "7h"] 
+	 	assert_equal("hand2 is the winner",deal_with_tie(hand1,hand2))
+	end
+
 	# def test_deal_with_tie_using_royal
 	# 	hand1 = ["Qh", "Qd", "4h", "5h", "6h"]
 	# 	hand2 = ["3h", "4h", "Th", "Td", "6h"] 
