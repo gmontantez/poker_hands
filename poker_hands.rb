@@ -85,45 +85,47 @@ def deal_with_tie(hand1,hand2)
   array1 = []
   array2 = []
   result = ""
-  
-  hand1.each do |card|
-    match_hand1 = card.split("")
-    matches1 = match_hand1[0].to_i
-    array1 << matches1
-  end
-  matches_array1 = array1.sort
-  hand1_dupes = matches_array1.join().match('(.)\1')[0]
-  matched_elements1 = hand1_dupes.split(//)
-  element1 = matched_elements1[0].to_i
+  face_value1 = []
+  face_value2 = []
 
-  p matches_array1
-  p matched_elements1
-  p element1
+  hand1.each do |card|
+    face_value1 << card[0]
+  end
+  royal_hand1 = face_changer(face_value1)
+    p "this is the royal hand1 #{royal_hand1}"
+  matches_array1 = royal_hand1.sort
+    p "this is the matches array1 #{matches_array1}"
+  hand1_dupes = matches_array1.select{|item| matches_array1.count(item) > 1}.uniq
+    p "this is the hand1_dupes #{hand1_dupes}"
+  matched_element1 = hand1_dupes[0]
+  p matched_element1
+
 
   hand2.each do |card|
-    match_hand2 = card.split("")
-    matches2 = match_hand2[0].to_i
-    array2 << matches2
+    face_value2 << card[0]
   end
-  matches_array2 = array2.sort
-  hand2_dupes = matches_array2.join().match('(.)\1')[0]
-  matched_elements2 = hand2_dupes.split(//)
-  element2 = matched_elements2[0].to_i
+  royal_hand2 = face_changer(face_value2)
+    p "this is the royal hand2 #{royal_hand2}"
+  matches_array2 = royal_hand2.sort
+    p matches_array2
+  hand2_dupes = matches_array2.select{|item| matches_array2.count(item) > 1}.uniq
+    p hand2_dupes
+  matched_element2 = hand2_dupes[0]
+    p matched_element2
+ 
+ matched_element1
+ matched_element2
 
-  p matches_array2
-  p matched_elements2
-  p element2
-
-
-  if element1 > element2
+  if matched_element1 > matched_element2
     result = "hand1 is the winner"
-    # p "this is match_hand1#{match_hand1} and this is match_card2 #{match_card2}!!!!!!!!!!!"
+      p "this is matched element1 #{matched_element1}!!!!!!!!!!"
   else 
     result = "hand2 is the winner"
-  # p "this is match 2 #{match_hand2}!!!!!!!!!!!"
+      p "this is matched element2 #{matched_element2}!!!!!!!!!!!"
   end
-  # result
-  # p "this is match_hand1 #{match_hand1} and this is match_card2 #{match_card2}!!!!!!!!!!!"
+  result
+  p result
+
 end
 
   
@@ -239,9 +241,12 @@ def four_of_a_kind(hand)
   suit_value = []
   face_value = []
   hand.each do |card|
+
     face_value << card[0]
     suit_value << card[1]
   end
+  face_value = face_changer(face_value)
+  face_value.sort!
   if face_value.uniq.length == 2
     true
   end
