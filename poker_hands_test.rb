@@ -315,11 +315,18 @@ class Poker_hands_test < Minitest::Test
 	#  	assert_equal("hand2 is the winner",hand_comparison(hands))
 	# end
 
-	def test_deal_with_tie_using_royal_four_of_a_kind
-		hand1 = ["Qh", "Qd", "Qc", "Qs", "6h"]
-		hand2 = ["3h", "Ts", "Th", "Td", "Tc"] 
-		hands = {"hand1" => hand1, "hand2" => hand2}
-	 	assert_equal("hand1 is the winner",hand_comparison(hands))
+	# def test_deal_with_tie_using_royal_four_of_a_kind
+	# 	hand1 = ["Qh", "Qd", "Qc", "Qs", "6h"]
+	# 	hand2 = ["3h", "Ts", "Th", "Td", "Tc"] 
+	# 	hands = {"hand1" => hand1, "hand2" => hand2}
+	#  	assert_equal("hand1 is the winner",hand_comparison(hands))
+	# end
+
+	def test_deal_with_tie_using_royal_three_of_a_kind
+		hand1 = ["2h", "Qd", "Qc", "Qs", "6h"]
+		hand2 = ["3h", "Js", "Kh", "Kd", "Kc"] 
+		# hands = {"hand1" => hand1, "hand2" => hand2}
+	 	assert_equal("hand2 is the winner",deal_with_tie(hand1,hand2))
 	end
 
 end
