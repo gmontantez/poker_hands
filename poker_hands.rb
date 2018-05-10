@@ -92,6 +92,7 @@ end
 
 def deal_with_tie(hand1,hand2)
   result = ""
+  high_number = ""
   face_value1 = []
   face_value2 = []
 
@@ -100,8 +101,10 @@ def deal_with_tie(hand1,hand2)
   end
   royal_hand1 = face_changer(face_value1)
   matches_array1 = royal_hand1.sort
+  new_hand1 = matches_array1.group_by { |e| e }.select { |k, v| v.size.eql? 1 }.keys
   hand1_dupes = matches_array1.select{|item| matches_array1.count(item) > 1}.uniq
   matched_element1 = hand1_dupes.sum
+  high_num1 = new_hand1.last
 
   
   hand2.each do |card|
@@ -109,47 +112,26 @@ def deal_with_tie(hand1,hand2)
   end
   royal_hand2 = face_changer(face_value2)
   matches_array2 = royal_hand2.sort
+  new_hand2 = matches_array2.group_by { |e| e }.select { |k, v| v.size.eql? 1 }.keys
   hand2_dupes = matches_array2.select{|item| matches_array2.count(item) > 1}.uniq
   matched_element2 = hand2_dupes.sum
-
-
+  high_num2 = new_hand2.last
+  
   if matched_element1 > matched_element2
     result = "hand1 is the winner"
-  else matched_element1 < matched_element2
+  elsif matched_element1 < matched_element2
     result = "hand2 is the winner"
+  else matched_element1 == matched_element2
+    if high_num1 > high_num2
+      high_number = "hand1 is the winner"
+    else
+      high_number = "hand2 is the winner"
+    end
+    high_number
   end
    # result
 end
 
-  
-# def kicker_card(hand,match_card)
-#   new_hand = hand.delete(match_card)
-#   high_num = hand.last
-# end
-
-# def eval_tie(hand1,hand2)
-#   # hand1match = []
-#   # hand2match = []
-#   hand1match = deal_with_tie(hand1)
-#   hand2match = deal_with_tie(hand2)
-#   # if hand1match == hand2match
-#   #   kicker_card1 = kicker_card(hand1)
-#   #   kicker_card2 = kicker_card(hand2)
-#   #   if kicker_card1 > kicker_card2
-#   #     "hand1 is the winner"
-#   #     else kicker_card2 > kicker_card1
-#   #     "hand2 is the winner"
-#   #   end
-#   if hand1match > hand2match
-#     "hand1 is the winner"
-    
-#   else
-#     hand2match > hand1match
-#     "hand2 is the winner"
-#   end
-# end
-
-  
 # def tie_breaker(hand1,hand2)
 #   suit_value = []
 #   face_value = []
@@ -187,11 +169,11 @@ end
 # end
 
 def royal_flush(hand)
-  suit_value = [] #give an empty array to suit_value to be able to push each index position 1 into it in conditional below 
-  face_value = [] #give an empty array to face_value to be able to push each index position 0 into it in conditional below
-  hand.each do |card| #iterates over each hand of cards
-    face_value << card[0] #iterates over each card and pushed index position 0 into face_value array 
-    suit_value << card[1] #iterates over each card and pushed index position 1 into suit_value array 
+  suit_value = []  
+  face_value = [] 
+  hand.each do |card| 
+    face_value << card[0]  
+    suit_value << card[1] 
   end
   if suit_value.uniq.length == 1 #checks for duplication of index position 1 in each card that was pushed into suit_value; if it matches then it comes back 1 time 
     if face_value.include?("A") && face_value.include?("K") && face_value.include?("Q") && face_value.include?("J") && face_value.include?("T") #if index position 0 of each card in face_value array and returns all of these conditionals, then it returns true
@@ -202,12 +184,11 @@ def royal_flush(hand)
 end
 
 def straight_flush(hand)
-  suit_value = []
-  face_value = []
-  hand.each do |card|
-
-    face_value << card[0]
-    suit_value << card[1]
+  suit_value = []  
+  face_value = [] 
+  hand.each do |card| 
+    face_value << card[0]  
+    suit_value << card[1] 
   end
   face_value = face_changer(face_value)
   face_value.sort!
@@ -218,15 +199,6 @@ def straight_flush(hand)
       end
     end
 end
-
-def compare_two_straights(hand1,hand2)
-  if hand1 > hand2
-    true
-  else
-    false
-  end
-end
-
 
 def four_of_a_kind(hand)
   face_value = cards(hand)
@@ -253,7 +225,12 @@ def flush(hand)
 end 
 
 def straight(hand)
-  face_value = cards(hand)
+  suit_value = []  
+  face_value = [] 
+  hand.each do |card| 
+    face_value << card[0]  
+    suit_value << card[1] 
+  end
   face_value = face_changer(face_value)
   face_value.sort!
   newarray = [*face_value[0]..face_value[0]+4]
@@ -270,12 +247,7 @@ def three_of_a_kind(hand)
 end 
 
 def two_pair(hand)
-  suit_value = []
-  face_value = []
-    hand.each do |card|
-      face_value << card[0]
-      suit_value << card[1]
-    end
+  face_value = cards(hand)
     if face_value.uniq.length == 3 
       true
     end 
