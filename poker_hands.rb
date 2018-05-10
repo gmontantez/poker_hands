@@ -19,6 +19,16 @@ hands = {}
   hands
 end
 
+def cards(hand)
+  suit_value = []
+  face_value = []
+  hand.each do |card|
+    face_value << card[0]
+    suit_value << card[1]
+end
+  
+end
+
 def face_changer(face_value)
   #maps elements of one array to another, converting each letter element to a number
   face_value = face_value.map do |face|
@@ -73,8 +83,8 @@ def hand_comparison(hands)
       "starter hand1 is the winner"
     elsif starter_hands["hand1"] < starter_hands["hand2"]
       "starter hand2 is the winner"
-    else starter_hands['hand1'] == starter_hands['hand2']
-      deal_with_tie(hands['hand1'],hands['hand2'])
+    # else starter_hands['hand1'] == starter_hands['hand2']
+    #   deal_with_tie(hands['hand1'],hands['hand2'])
     # else starter_hands['hand1'] = starter_hands['hand2']
     #   tie_breaker(hands['hand1'],hands['hand2'])
   end
@@ -239,12 +249,7 @@ def four_of_a_kind(hand)
 end 
 
 def full_house(hand)
-  suit_value = []
-  face_value = []
-    hand.each do |card|
-      face_value << card[0]
-      suit_value << card[1]
-    end
+    face_value = cards(hand)
     if face_value.uniq.length == 2 
     true
     end 

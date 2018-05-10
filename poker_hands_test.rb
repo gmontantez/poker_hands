@@ -221,6 +221,13 @@ class Poker_hands_test < Minitest::Test
 	# 	assert_equal("starter hand2 is the winner",hand_comparison(hands))
 	# end
 
+	def test_hand_comparison_full_house_beats_a_flush
+		hand1 = ["5h", "5c", "5d", "2s", "2d"]
+		hand2 = ["6h", "3h", "8h", "9h", "4"]
+		hands = {"hand1" => hand1, "hand2" => hand2}
+		assert_equal("starter hand1 is the winner",hand_comparison(hands))
+	end
+
 	# def test_hand_comparison_four_of_a_kind_beats_a_pair
 	# 	hand1 = ["2h", "2s", "2c", "2d", "Ah"]
 	# 	hand2 = ["7h", "7c", "4h", "6h", "5h"]
@@ -315,46 +322,46 @@ class Poker_hands_test < Minitest::Test
 	#  	assert_equal("hand2 is the winner",hand_comparison(hands))
 	# end
 
-	def test_deal_with_tie_using_royal_four_of_a_kind
-		hand1 = ["Qh", "Qd", "Qc", "Qs", "6h"]
-		hand2 = ["3h", "Ts", "Th", "Td", "Tc"] 
-		hands = {"hand1" => hand1, "hand2" => hand2}
-	 	assert_equal("hand1 is the winner",deal_with_tie(hand1,hand2))
-	end
+	# def test_deal_with_tie_using_royal_four_of_a_kind
+	# 	hand1 = ["Qh", "Qd", "Qc", "Qs", "6h"]
+	# 	hand2 = ["3h", "Ts", "Th", "Td", "Tc"] 
+	# 	hands = {"hand1" => hand1, "hand2" => hand2}
+	#  	assert_equal("hand1 is the winner",deal_with_tie(hand1,hand2))
+	# end
 
-	def test_deal_with_tie_using_royal_three_of_a_kind
-		hand1 = ["2h", "Qd", "Qc", "Qs", "6h"]
-		hand2 = ["3h", "Js", "Kh", "Kd", "Kc"] 
-		# hands = {"hand1" => hand1, "hand2" => hand2}
-	 	assert_equal("hand2 is the winner",deal_with_tie(hand1,hand2))
-	end
+	# def test_deal_with_tie_using_royal_three_of_a_kind
+	# 	hand1 = ["2h", "Qd", "Qc", "Qs", "6h"]
+	# 	hand2 = ["3h", "Js", "Kh", "Kd", "Kc"] 
+	# 	# hands = {"hand1" => hand1, "hand2" => hand2}
+	#  	assert_equal("hand2 is the winner",deal_with_tie(hand1,hand2))
+	# end
 
-	def test_deal_with_tie_using_royal_pair
-		hand1 = ["2h", "Jd", "Jc", "Qs", "6h"]
-		hand2 = ["3h", "Js", "Th", "Td", "Kc"] 
-		# hands = {"hand1" => hand1, "hand2" => hand2}
-	 	assert_equal("hand1 is the winner",deal_with_tie(hand1,hand2))
-	end
+	# def test_deal_with_tie_using_royal_pair
+	# 	hand1 = ["2h", "Jd", "Jc", "Qs", "6h"]
+	# 	hand2 = ["3h", "Js", "Th", "Td", "Kc"] 
+	# 	# hands = {"hand1" => hand1, "hand2" => hand2}
+	#  	assert_equal("hand1 is the winner",deal_with_tie(hand1,hand2))
+	# end
 
-	def test_hand_comparison_using_royal_pair
-		hand1 = ["2h", "Jd", "Jc", "Qs", "6h"]
-		hand2 = ["3h", "Js", "Th", "Td", "Kc"] 
-		hands = {"hand1" => hand1, "hand2" => hand2}
-	 	assert_equal("hand1 is the winner",hand_comparison(hands))
-	end
+	# def test_hand_comparison_using_royal_pair
+	# 	hand1 = ["2h", "Jd", "Jc", "Qs", "6h"]
+	# 	hand2 = ["3h", "Js", "Th", "Td", "Kc"] 
+	# 	hands = {"hand1" => hand1, "hand2" => hand2}
+	#  	assert_equal("hand1 is the winner",hand_comparison(hands))
+	# end
 
-	def test_hand_comparison_using_royal_three_of_a_kind
-		hand1 = ["2h", "Qd", "Qc", "Qs", "6h"]
-		hand2 = ["3h", "Js", "Kh", "Kd", "Kc"] 
-		hands = {"hand1" => hand1, "hand2" => hand2}
-	 	assert_equal("hand2 is the winner",hand_comparison(hands))
-	end
+	# def test_hand_comparison_using_royal_three_of_a_kind
+	# 	hand1 = ["2h", "Qd", "Qc", "Qs", "6h"]
+	# 	hand2 = ["3h", "Js", "Kh", "Kd", "Kc"] 
+	# 	hands = {"hand1" => hand1, "hand2" => hand2}
+	#  	assert_equal("hand2 is the winner",hand_comparison(hands))
+	# end
 
-	def test_hand_comparison_using_royal_four_of_a_kind
-		hand1 = ["Qh", "Qd", "Qc", "Qs", "6h"]
-		hand2 = ["3h", "Ts", "Th", "Td", "Tc"] 
-		hands = {"hand1" => hand1, "hand2" => hand2}
-	 	assert_equal("hand1 is the winner",hand_comparison(hands))
-	end
+	# def test_hand_comparison_using_royal_four_of_a_kind
+	# 	hand1 = ["Qh", "Qd", "Qc", "Qs", "6h"]
+	# 	hand2 = ["3h", "Ts", "Th", "Td", "Tc"] 
+	# 	hands = {"hand1" => hand1, "hand2" => hand2}
+	#  	assert_equal("hand1 is the winner",hand_comparison(hands))
+	# end
 
 end
