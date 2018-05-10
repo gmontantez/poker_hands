@@ -350,4 +350,11 @@ class Poker_hands_test < Minitest::Test
 	 	assert_equal("hand2 is the winner",hand_comparison(hands))
 	end
 
+	def test_hand_comparison_using_royal_four_of_a_kind
+		hand1 = ["Qh", "Qd", "Qc", "Qs", "6h"]
+		hand2 = ["3h", "Ts", "Th", "Td", "Tc"] 
+		hands = {"hand1" => hand1, "hand2" => hand2}
+	 	assert_equal("hand1 is the winner",hand_comparison(hands))
+	end
+
 end
