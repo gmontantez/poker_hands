@@ -65,8 +65,7 @@ def hand_comparison(hands)
     else high_card(value) == true
       starter_hands[key] = 10
     end
-   # p hands
-   # p starter_hands 
+   # starter_hands 
   end
    # hands['hand1']
    # hands['hand2']
@@ -79,6 +78,7 @@ def hand_comparison(hands)
     # else starter_hands['hand1'] = starter_hands['hand2']
     #   tie_breaker(hands['hand1'],hands['hand2'])
   end
+
 end
 
 def deal_with_tie(hand1,hand2)
@@ -92,40 +92,25 @@ def deal_with_tie(hand1,hand2)
     face_value1 << card[0]
   end
   royal_hand1 = face_changer(face_value1)
-    # p "this is the royal hand1 #{royal_hand1}"
   matches_array1 = royal_hand1.sort
-    # p "this is the matches array1 #{matches_array1}"
   hand1_dupes = matches_array1.select{|item| matches_array1.count(item) > 1}.uniq
-    # p "this is the hand1_dupes #{hand1_dupes}"
   matched_element1 = hand1_dupes[0]
-  # p matched_element1
-
 
   hand2.each do |card|
     face_value2 << card[0]
   end
   royal_hand2 = face_changer(face_value2)
-    # p "this is the royal hand2 #{royal_hand2}"
   matches_array2 = royal_hand2.sort
-    # p matches_array2
   hand2_dupes = matches_array2.select{|item| matches_array2.count(item) > 1}.uniq
-    # p hand2_dupes
   matched_element2 = hand2_dupes[0]
-    # p matched_element2
- 
- matched_element1
- matched_element2
+
 
   if matched_element1 > matched_element2
     result = "hand1 is the winner"
-      # p "this is matched element1 #{matched_element1}!!!!!!!!!!"
-  else 
+  else matched_element1 < matched_element2
     result = "hand2 is the winner"
-      # p "this is matched element2 #{matched_element2}!!!!!!!!!!!"
   end
    result
-  # p result
-
 end
 
   
