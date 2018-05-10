@@ -82,8 +82,8 @@ def hand_comparison(hands)
       "starter hand1 is the winner"
     elsif starter_hands["hand1"] < starter_hands["hand2"]
       "starter hand2 is the winner"
-    # else starter_hands['hand1'] == starter_hands['hand2']
-    #   deal_with_tie(hands['hand1'],hands['hand2'])
+    else starter_hands['hand1'] == starter_hands['hand2']
+      deal_with_tie(hands['hand1'],hands['hand2'])
     # else starter_hands['hand1'] = starter_hands['hand2']
     #   tie_breaker(hands['hand1'],hands['hand2'])
   end
@@ -99,11 +99,13 @@ def deal_with_tie(hand1,hand2)
 
   hand1.each do |card|
     face_value1 << card[0]
+    p face_value1
   end
   royal_hand1 = face_changer(face_value1)
   matches_array1 = royal_hand1.sort
   hand1_dupes = matches_array1.select{|item| matches_array1.count(item) > 1}.uniq
-  matched_element1 = hand1_dupes[0]
+  matched_sum1 = hand1_dupes.sum
+  matched_element1 = matched_sum1[0]
 
   hand2.each do |card|
     face_value2 << card[0]
@@ -111,15 +113,17 @@ def deal_with_tie(hand1,hand2)
   royal_hand2 = face_changer(face_value2)
   matches_array2 = royal_hand2.sort
   hand2_dupes = matches_array2.select{|item| matches_array2.count(item) > 1}.uniq
-  matched_element2 = hand2_dupes[0]
+  matched_sum2 = hand2_dupes.sum
+  matched_element2 = matched_sum2[0]
 
 
-  # if matched_element1 > matched_element2
-  #   result = "hand1 is the winner"
-  # else matched_element1 < matched_element2
-  #   result = "hand2 is the winner"
-  # end
-  #  result
+  if matched_element1 > matched_element2
+
+    result = "hand1 is the winner"
+  else matched_element1 < matched_element2
+    result = "hand2 is the winner"
+  end
+   # result
 end
 
   
@@ -264,12 +268,7 @@ def straight(hand)
 end
 
 def three_of_a_kind(hand)
-  suit_value = []
-  face_value = []
-    hand.each do |card|
-      face_value << card[0]
-      suit_value << card[1]
-    end
+  face_value = cards(hand)
     if face_value.uniq.length == 3
       true
     end 
@@ -306,8 +305,7 @@ def high_card(hand)
     true
 end
 
-hands = hand_builder()
-hand_comparison(hands)
+
 
 
 
