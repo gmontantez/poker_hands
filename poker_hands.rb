@@ -93,6 +93,7 @@ end
 def deal_with_tie(hand1,hand2)
   result = ""
   high_number = ""
+  new_kicker_card = ""
   face_value1 = []
   face_value2 = []
 
@@ -101,9 +102,16 @@ def deal_with_tie(hand1,hand2)
   end
   royal_hand1 = face_changer(face_value1)
   matches_array1 = royal_hand1.sort
-  new_hand1 = matches_array1.group_by { |e| e }.select { |k, v| v.size.eql? 1 }.keys
+  new_hand1 = matches_array1.group_by{ |e| e }.select { |k, v| v.size.eql? 1 }.keys
+  # p new_hand1
+  new_kick1 = new_hand1.pop
+  # p new_kick1
+  new_kicker1 = new_hand1.last
+  # p new_kicker1
   hand1_dupes = matches_array1.select{|item| matches_array1.count(item) > 1}.uniq
+  # p hand1_dupes
   matched_element1 = hand1_dupes.sum
+  # p matched_element1
   high_num1 = new_hand1.last
 
   
@@ -112,25 +120,39 @@ def deal_with_tie(hand1,hand2)
   end
   royal_hand2 = face_changer(face_value2)
   matches_array2 = royal_hand2.sort
-  new_hand2 = matches_array2.group_by { |e| e }.select { |k, v| v.size.eql? 1 }.keys
+  new_hand2 = matches_array2.group_by{ |e| e }.select { |k, v| v.size.eql? 1 }.keys
+  # p new_hand2
+  new_kick2 = new_hand2.pop
+  # p new_kick2
+  new_kicker2 = new_hand2.last
+  # p new_kicker2
   hand2_dupes = matches_array2.select{|item| matches_array2.count(item) > 1}.uniq
   matched_element2 = hand2_dupes.sum
+  # p matched_element2
   high_num2 = new_hand2.last
-  
-  if matched_element1 > matched_element2
+    if matched_element1 > matched_element2
     result = "hand1 is the winner"
-  elsif matched_element1 < matched_element2
+    elsif matched_element1 < matched_element2
     result = "hand2 is the winner"
-  else matched_element1 == matched_element2
-    if high_num1 > high_num2
+    else matched_element1 == matched_element2
+      if high_num1 > high_num2
       high_number = "hand1 is the winner"
-    else
+      elsif high_num1 < high_num2
       high_number = "hand2 is the winner"
-    end
-    high_number
+      else high_num1 == high_num2
+        if new_kicker1 > new_kicker2
+          new_kicker_card = "hand1 is the winner"
+        else new_kicker1 < new_kicker2
+          new_kicker_card = "hand2 is the winner"
+        end
+        #   new_kicker_card
+        # end
+      end
+      # high_number
   end
-   # result
+    # result
 end
+
 
 # def tie_breaker(hand1,hand2)
 #   suit_value = []
@@ -241,6 +263,8 @@ end
 
 def three_of_a_kind(hand)
   face_value = cards(hand)
+  face_value = face_changer(face_value)
+  face_value.sort!
     if face_value.uniq.length == 3
       true
     end 
@@ -248,6 +272,8 @@ end
 
 def two_pair(hand)
   face_value = cards(hand)
+  face_value = face_changer(face_value)
+  face_value.sort!
     if face_value.uniq.length == 3 
       true
     end 
@@ -255,6 +281,8 @@ end
 
 def pair(hand)
   face_value = cards(hand)
+  face_value = face_changer(face_value)
+  face_value.sort!
     if face_value.uniq.length == 4
       true
     end 
