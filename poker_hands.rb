@@ -104,15 +104,22 @@ def deal_with_tie(hand1,hand2)
   matches_array1 = royal_hand1.sort
   new_hand1 = matches_array1.group_by{ |e| e }.select { |k, v| v.size.eql? 1 }.keys
   # p new_hand1
-  new_kick1 = new_hand1.pop
-  # p new_kick1
-  new_kicker1 = new_hand1.last
+  
   # p new_kicker1
   hand1_dupes = matches_array1.select{|item| matches_array1.count(item) > 1}.uniq
+  # p new_kicker1
   # p hand1_dupes
   matched_element1 = hand1_dupes.sum
-  # p matched_element1
+  # p new_kicker1
+  p matched_element1
   high_num1 = new_hand1.last
+  new_kick1 = new_hand1.pop
+  new_kicker1 = new_hand1.last
+  p high_num1
+  p new_kick1
+  p new_kicker1
+  # p high_num1
+  # p high_num1
 
   
   hand2.each do |card|
@@ -121,39 +128,35 @@ def deal_with_tie(hand1,hand2)
   royal_hand2 = face_changer(face_value2)
   matches_array2 = royal_hand2.sort
   new_hand2 = matches_array2.group_by{ |e| e }.select { |k, v| v.size.eql? 1 }.keys
-  # p new_hand2
-  new_kick2 = new_hand2.pop
-  # p new_kick2
-  new_kicker2 = new_hand2.last
-  # p new_kicker2
   hand2_dupes = matches_array2.select{|item| matches_array2.count(item) > 1}.uniq
   matched_element2 = hand2_dupes.sum
-  # p matched_element2
+  p matched_element2
   high_num2 = new_hand2.last
+  new_kick2 = new_hand2.pop
+  new_kicker2 = new_hand2.last
+  p high_num2
+  p new_kick2
+  p new_kicker2
+
     if matched_element1 > matched_element2
     result = "hand1 is the winner"
     elsif matched_element1 < matched_element2
     result = "hand2 is the winner"
     else matched_element1 == matched_element2
       if high_num1 > high_num2
-      high_number = "hand1 is the winner"
+          high_number = "hand1 kicker is the winner"
       elsif high_num1 < high_num2
-      high_number = "hand2 is the winner"
+          high_number = "hand2 kicker is the winner"
       else high_num1 == high_num2
         if new_kicker1 > new_kicker2
-          new_kicker_card = "hand1 is the winner"
+          new_kicker_card = "hand1 next kicker is the winner"
         else new_kicker1 < new_kicker2
-          new_kicker_card = "hand2 is the winner"
+          new_kicker_card = "hand2 next kicker is the winner"
         end
-        #   new_kicker_card
-        # end
       end
-      # high_number
-  end
-    # result
+    end
 end
-
-
+ 
 # def tie_breaker(hand1,hand2)
 #   suit_value = []
 #   face_value = []
@@ -234,13 +237,20 @@ end
 
 def full_house(hand)
   face_value = cards(hand)
+  face_value = face_changer(face_value)
+  face_value.sort!
   if face_value.uniq.length == 2 
     true
     end 
 end 
 
 def flush(hand)
-  suit_value = cards(hand)
+  suit_value = []  
+  face_value = [] 
+  hand.each do |card| 
+    face_value << card[0]  
+    suit_value << card[1] 
+  end
   if suit_value.uniq.length == 1
     true
     end
