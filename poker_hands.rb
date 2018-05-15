@@ -27,7 +27,7 @@ face_value = []
 	hand.each do |card|
 		# Pushes index[0] of card into face_value array
 		face_value << card[0]
-		# Pushes index[0] of card into face_value array
+		# Pushes index[1] of card into suit_value array
 		suit_value << card[1]
 	end
 end
@@ -36,37 +36,42 @@ end
 def look_at_tie(hand1,hand2)
 	face_value1 = []
 	face_value2 = []
-	kicker_card_message = ""
 	result = ""
-	high_number_string = ""
-
+	
 	hand1.each do |card|
 		face_value1 << card[0]
+	#Pushes the face value of each card into an empty array.
 	end
 	hand1_faces = face_changer(face_value1)
-  	matches1 = hand1_faces.sort
-  	new_hand1 = matches1.group_by { |card| card }.select { |k, v| v.size.eql? 1 }.keys
- 	hand1_dupes = matches1.select{|item| matches1.count(item) > 1}.uniq
+	#Changes any face value letters to integers // Output is the five card hand, numbers only, in an array
+  	sorted_faces1 = hand1_faces.sort
+  	#Sorts the array from lowest number to the highest.
+  	new_hand1 = sorted_faces1.group_by { |card| card }.select { |k, v| v.size.eql? 1 }.keys
+  	#Puts the sorted non-duplicate integers into a array (excludes the duplicate integers).
+ 	hand1_dupes = sorted_faces1.select{|item| sorted_faces1.count(item) > 1}.uniq
+ 	#Recognizes the duplicate integers in the sorted_faces1 hand (5 cards) and returns one of the duplicate integers in an array.
  	hand1_dupes_sum = hand1_dupes.sum
+ 	#Takes the one duplicate integer in the array (from above) and converts it into an integer only without an array.
  	high_num1 = new_hand1.last
+ 	#Returns the kicker card, last number in the new_hand1 array (the array that excludes the duplicate elements), as an integer only.
  	next_kicker1 = new_hand1.pop
-  	last_card1 = new_hand1.last
-  	next_kicker1 = new_hand1.pop
-  	last_card1 = new_hand1[0]
-
+ 	#Returns and removes the last number in the new_hand1 array (the array that excludes the duplicate elements).
+ 	last_card1 = new_hand1.last
+ 	#Returns the next kicker card, next to the last number in the new_hand1 array (the array that excludes the duplicate elements), as an integer only.
+   	last_card1 = new_hand1[0]
+   	#Returns the last kicker card, the first number in the new_hand1 array (the array that excludes the duplicate elements), as an integer only.
 
 	hand2.each do |card|
 		face_value2 << card[0]
 	end
 	hand2_faces = face_changer(face_value2)
-  	matches2 = hand2_faces.sort
-  	new_hand2 = matches2.group_by { |card| card }.select { |k, v| v.size.eql? 1 }.keys
-  	hand2_dupes = matches2.select{|item| matches2.count(item) > 1}.uniq
+  	sorted_faces2 = hand2_faces.sort
+  	new_hand2 = sorted_faces2.group_by { |card| card }.select { |k, v| v.size.eql? 1 }.keys
+  	hand2_dupes = sorted_faces2.select{|item| sorted_faces2.count(item) > 1}.uniq
  	hand2_dupes_sum = hand2_dupes.sum
  	high_num2 = new_hand2.last
  	next_kicker2 = new_hand2.pop
-  	last_card2 = new_hand2.last
-  	next_kicker2 = new_hand2.pop
+ 	last_card1 = new_hand1.last
   	last_card2 = new_hand2[0]
 
 	if hand1_dupes_sum > hand2_dupes_sum 
@@ -75,17 +80,19 @@ def look_at_tie(hand1,hand2)
 	 	 result = "hand2 wins"
 	elsif hand1_dupes_sum == hand2_dupes_sum
 		if high_num1 > high_num2
-      		high_number_string = "hand1 is the winner"
+      		result = "hand1 is the winner"
     	elsif high_num1 < high_num2
-      		high_number_string = "hand2 is the winner"
+      		result = "hand2 is the winner"
       	elsif last_card1 >  last_card2
-      		kicker_card_message = "Hand1 is the winner"
+      		result = "Hand1 is the winner"
       	elsif last_card2 > last_card1
-      		kicker_card_message = "Hand2 is the winner"
-      	else matches1 == matches2
-    		kicker_card_message = "it's a tie"
+      		result = "Hand2 is the winner"
+      	else sorted_faces1 == sorted_faces2
+    		result = "it's a tie"
       	end
     end
+    # hand1_faces
+    # hand2_faces
 end
 
 def face_changer(face_value)
@@ -283,3 +290,7 @@ def high_card(hand)
 	# face_value.sort!
 	true
 end
+
+hands = hand_builder()
+p hands
+p hand_comparison (hands)

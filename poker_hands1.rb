@@ -104,14 +104,23 @@ def deal_with_tie(hand1,hand2)
     face_value1 << card[0]
   end
   royal_hand1 = face_changer(face_value1)
+  #Converts any face value letters to integers // Output is the five card hand, numbers only in an array
   matches_array1 = royal_hand1.sort
+  #Sorts the array from lowest number to the highest.
   new_hand1 = matches_array1.group_by{ |e| e }.select { |k, v| v.size.eql? 1 }.keys
+  #Puts the sorted non-duplicate integers into a array (excludes the duplicate integers).
   hand1_dupes = matches_array1.select{|item| matches_array1.count(item) > 1}.uniq
+  #Recognizes the duplicate integers in the sorted_faces1 hand (5 cards) and returns one of the duplicate integers in an array.
   matched_element1 = hand1_dupes.sum
+  #Takes the one duplicate integer in the array (from above) and converts it into an integer only without an array.
   # p matched_element1
   high_num1 = new_hand1.last
-  new_kick1 = new_hand1.pop
+  #Returns the kicker card, last number in the new_hand1 array (the array that excludes the duplicate elements), as an integer only.
+  new_kicker1 = new_hand1.pop
+  #Returns and removes the last number in the new_hand1 array (the array that excludes the duplicate elements).
   new_kicker1 = new_hand1.last
+  #Returns the next to the last integer (next kicker card) from the new_hand1 array (the array that excludes the duplicate elements).
+  
   # p high_num1
   # p new_kick1
   # p new_kicker1
