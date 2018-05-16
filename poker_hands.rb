@@ -32,8 +32,60 @@ face_value = []
 	end
 end
 
-# look_at_tie function looks at each position(then deletes it from hand being evaluated) in hand and counts each dulpicated card
+
+def high_card_ties(hand1,hand2)
+	face_value1 = []
+	face_value2 = []
+	hand1.each do |card|
+		face_value1 << card[0]
+	end
+	hand1_faces = face_changer(face_value1)
+	sorted_faces1 = hand1_faces.sort
+
+	hand2.each do |card|
+		face_value2 << card[0]
+	end
+	hand2_faces = face_changer(face_value2)
+	sorted_faces2 = hand2_faces.sort
+
+
+	if sorted_faces1[4] > sorted_faces2[4]
+  		result = "hand1 high card hand wins"
+  	elsif sorted_faces1[4] < sorted_faces2[4]
+  		result = "hand2 high card hand wins"
+  	else sorted_faces1[4] == sorted_faces2[4]
+  		if sorted_faces1[3] > sorted_faces2[3]
+  			result = "hand1 high card kicker hand wins"
+  		elsif sorted_faces1[3] < sorted_faces2[3]
+  			result = "hand2 high card kicker hand wins"
+  	    else sorted_faces1[3] == sorted_faces2[3]
+  			if sorted_faces1[2] > sorted_faces2[2]
+  				result = "hand1 high card two kicker hand wins"
+  			elsif sorted_faces1[2] < sorted_faces2[2]
+  				result = "hand2 high card two kicker hand wins"
+  			else sorted_faces1[2] == sorted_faces2[2]
+  				if sorted_faces1[1] > sorted_faces2[1]
+  					result = "hand1 high card three kicker hand wins"
+  				elsif sorted_faces1[1] < sorted_faces2[1]
+  					result = "hand2 high card three kicker hand wins"
+  				else sorted_faces1[1] == sorted_faces2[1]
+  					if sorted_faces1[0] > sorted_faces2[0]
+  						result = "hand1 high card last kicker hand wins"
+  					elsif sorted_faces1[0] < sorted_faces2[0]
+  						result = "hand2 high card last kicker hand wins"
+  					else sorted_faces1.sum == sorted_faces2.sum
+     					result = "it's a tie, split the pot"
+  					end
+  				end
+  	    	end
+  	    end
+  	end
+end
+
+
 def look_at_tie(hand1,hand2)
+	# hand1 = hand_builder()
+	# hand2 = hand_builder()
 	face_value1 = []
 	face_value2 = []
 	result = ""
@@ -45,20 +97,22 @@ def look_at_tie(hand1,hand2)
 	hand1_faces = face_changer(face_value1)
 	#Changes any face value letters to integers // Output is the five card hand, numbers only, in an array
   	sorted_faces1 = hand1_faces.sort
-  	#Sorts the array from lowest number to the highest.
+  	# p sorted_faces1
+  	sorted_array1 = sorted_faces1.sum
+  	# p sorted_array1
   	new_hand1 = sorted_faces1.group_by { |card| card }.select { |k, v| v.size.eql? 1 }.keys
   	#Puts the sorted non-duplicate integers into a array (excludes the duplicate integers).
  	hand1_dupes = sorted_faces1.select{|item| sorted_faces1.count(item) > 1}.uniq
  	#Recognizes the duplicate integers in the sorted_faces1 hand (5 cards) and returns one of the duplicate integers in an array.
  	hand1_dupes_sum = hand1_dupes.sum
  	#Takes the one duplicate integer in the array (from above) and converts it into an integer only without an array.
- 	high_num1 = new_hand1.last
+ 	# high_num1 = new_hand1.last
  	#Returns the kicker card, last number in the new_hand1 array (the array that excludes the duplicate elements), as an integer only.
  	next_kicker1 = new_hand1.pop
  	#Returns and removes the last number in the new_hand1 array (the array that excludes the duplicate elements).
- 	last_card1 = new_hand1.last
+ 	# last_card1 = new_hand1.last
  	#Returns the next kicker card, next to the last number in the new_hand1 array (the array that excludes the duplicate elements), as an integer only.
-   	last_card1 = new_hand1[0]
+   	# last_card1 = new_hand1[0]
    	#Returns the last kicker card, the first number in the new_hand1 array (the array that excludes the duplicate elements), as an integer only.
 
 	hand2.each do |card|
@@ -66,33 +120,36 @@ def look_at_tie(hand1,hand2)
 	end
 	hand2_faces = face_changer(face_value2)
   	sorted_faces2 = hand2_faces.sort
+  	sorted_array2 = sorted_faces2.sum
   	new_hand2 = sorted_faces2.group_by { |card| card }.select { |k, v| v.size.eql? 1 }.keys
   	hand2_dupes = sorted_faces2.select{|item| sorted_faces2.count(item) > 1}.uniq
  	hand2_dupes_sum = hand2_dupes.sum
- 	high_num2 = new_hand2.last
+ 	# high_num2 = new_hand2.last
  	next_kicker2 = new_hand2.pop
- 	last_card1 = new_hand1.last
-  	last_card2 = new_hand2[0]
-
-	if hand1_dupes_sum > hand2_dupes_sum 
+ 	# last_card2 = new_hand2.last
+  # 	last_card2 = new_hand2[0]
+  	# if sorted_array1 > sorted_array2
+  	# 	result = "hand1 straigt wins"
+  	# elsif sorted_array1 < sorted_array2
+  	# 	result = "hand2 straigt wins"
+  	# end
+  	if hand1_dupes_sum > hand2_dupes_sum 
 		result = "hand1 wins" 
 	elsif hand1_dupes_sum < hand2_dupes_sum
 	 	 result = "hand2 wins"
-	elsif hand1_dupes_sum == hand2_dupes_sum
-		if high_num1 > high_num2
-      		result = "hand1 is the winner"
-    	elsif high_num1 < high_num2
-      		result = "hand2 is the winner"
-      	elsif last_card1 >  last_card2
-      		result = "Hand1 is the winner"
-      	elsif last_card2 > last_card1
-      		result = "Hand2 is the winner"
-      	else sorted_faces1 == sorted_faces2
-    		result = "it's a tie"
-      	end
+	else hand1_dupes_sum == hand2_dupes_sum
+		# if high_num1 > high_num2
+  #     		result = "hand1 is the winner"
+  #   	elsif high_num1 < high_num2
+  #     		result = "hand2 is the winner"
+  #     	elsif last_card1 > last_card2
+  #     		result = "Hand1 is the winner"
+  #     	elsif last_card2 > last_card1
+  #     		result = "Hand2 is the winner"
+      	# else 
+    	result = high_card_ties(hand1,hand2)
     end
-    # hand1_faces
-    # hand2_faces
+
 end
 
 def face_changer(face_value)
@@ -149,41 +206,41 @@ def hand_comparison(hands)
 		"Player Two is the winner"
 	# Else if cloned hand1 is equal to cloned hand2 then look at straight_tiebreaker
 	else starter_hands["hand1"] = starter_hands["hand2"]
-		straight_tiebreaker(hands['hand1'],hands['hand2']) && look_at_tie(hands['hand1'],hands['hand2'])
+		look_at_tie(hands['hand1'],hands['hand2'])
 	end
 end
 
 # tie breaker is splitting the hands and gathering sum then returning winning score(highest sum)
-def straight_tiebreaker(hand1,hand2)
-  	suit_value = []
-  	face_value = []
-  	array_sum1 = []
-  	array_sum2 = []
-  	result = ""
-  hand1.each do |card|
-    face_value << card[0]
-    suit_value << card[1]
-  end
-    face_value = face_changer(face_value)
-    face_value.sort!
-    newarray1 = [*face_value[0]..face_value[0]+4]
-    array_sum1 = newarray1.sum
+# def straight_tiebreaker(hand1,hand2)
+#   	suit_value = []
+#   	face_value = []
+#   	array_sum1 = []
+#   	array_sum2 = []
+#   	result = ""
+#   hand1.each do |card|
+#     face_value << card[0]
+#     suit_value << card[1]
+#   end
+#     face_value = face_changer(face_value)
+#     face_value.sort!
+#     newarray1 = [*face_value[0]..face_value[0]+4]
+#     array_sum1 = newarray1.sum
 
-  hand2.each do |card|
-    face_value << card[0]
-    suit_value << card[1]
-  end
-    face_value = face_changer(face_value)
-    face_value.sort!
-    newarray2 = [*face_value[0]..face_value[0]+4]
-    array_sum2 = newarray2.sum
-    if array_sum1 > array_sum2
-    	result = "hand1 wins"
-    else 
-    	result = "hand2 wins"
-    end
-   	result
-end
+#   hand2.each do |card|
+#     face_value << card[0]
+#     suit_value << card[1]
+#   end
+#     face_value = face_changer(face_value)
+#     face_value.sort!
+#     newarray2 = [*face_value[0]..face_value[0]+4]
+#     array_sum2 = newarray2.sum
+#     if array_sum1 > array_sum2
+#     	result = "hand1 wins"
+#     else 
+#     	result = "hand2 wins"
+#     end
+#    	result
+# end
 
 def royal_flush(hand)
 suit_value = []
@@ -242,7 +299,6 @@ face_value = []
 		face_value << card[0]
 		suit_value << card[1]
 	end
-	# suit_value = card_separator(hand)
 	true if suit_value.uniq.length == 1
 end
 
@@ -258,7 +314,6 @@ face_value = []
 	newarray = [*face_value[0]..face_value[0]+4]
 	true if face_value == newarray
 end
-
 
 def three_of_a_kind(hand)
 	face_value = card_separator(hand)
@@ -291,6 +346,6 @@ def high_card(hand)
 	true
 end
 
-hands = hand_builder()
-p hands
-p hand_comparison (hands)
+# hands = hand_builder()
+# p hands
+# p hand_comparison (hands)
